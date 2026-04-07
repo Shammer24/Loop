@@ -1,11 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
   <title>Loop</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Loop funcionando 🔥</h1>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">Loop</div>
+      <div class="top-actions">
+        <button class="ghost-btn" id="openVsArena">VS</button>
+        <button class="ghost-btn" id="openProfile">Perfil</button>
+      </div>
+    </header>
+
+    <main class="feed" id="feed"></main>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-tab="feed">Feed</button>
+      <button class="nav-btn" data-tab="create">Crear</button>
+      <button class="nav-btn" data-tab="vs">VS</button>
+      <button class="nav-btn" data-tab="profile">Perfil</button>
+    </nav>
+  </div>
+
+  <div class="modal hidden" id="createModal">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Crear en Loop</h2>
+        <button class="close-btn" data-close="createModal">✕</button>
+      </div>
+      <div class="create-grid">
+        <button class="action-card" id="createPostBtn">
+          <span>📹</span><strong>Post normal</strong>
+          <small>Sube un video al feed</small>
+        </button>
+        <button class="action-card" id="createChallengeBtn">
+          <span>🔥</span><strong>Crear reto</strong>
+          <small>Lanza un challenge</small>
+        </button>
+        <button class="action-card" id="createVsBtn">
+          <span>⚔️</span><strong>Lanzar VS</strong>
+          <small>Desafía a otro usuario</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="composerModal">
+    <div class="sheet composer-sheet">
+      <div class="sheet-head">
+        <h2 id="composerTitle">Nuevo post</h2>
+        <button class="close-btn" data-close="composerModal">✕</button>
+      </div>
+      <div class="form">
+        <input id="inputUser" placeholder="Tu username" value="@kevin" />
+        <input id="inputTarget" class="hidden" placeholder="@usuario retado" />
+        <input id="inputTitle" placeholder="Título" />
+        <textarea id="inputCaption" placeholder="Escribe la descripción..."></textarea>
+        <select id="inputType">
+          <option value="post">Post normal</option>
+          <option value="challenge">Reto</option>
+          <option value="vs">VS</option>
+        </select>
+        <button class="primary-btn" id="publishBtn">Publicar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="commentsModal">
+    <div class="sheet comments-sheet">
+      <div class="sheet-head">
+        <h2>Comentarios</h2>
+        <button class="close-btn" data-close="commentsModal">✕</button>
+      </div>
+      <div id="commentsList" class="comments-list"></div>
+      <div class="comment-box">
+        <input id="commentInput" placeholder="Escribe un comentario..." />
+        <button class="primary-btn small" id="sendComment">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="vsModal">
+    <div class="sheet vs-sheet">
+      <div class="sheet-head">
+        <h2>Loop VS Arena</h2>
+        <button class="close-btn" data-close="vsModal">✕</button>
+      </div>
+      <div id="vsContent"></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="profileModal">
+    <div class="sheet profile-sheet">
+      <div class="sheet-head">
+        <h2>Perfil</h2>
+        <button class="close-btn" data-close="profileModal">✕</button>
+      </div>
+      <div id="profileContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
-  
