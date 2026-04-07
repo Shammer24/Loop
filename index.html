@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1020" />
-  <title>Loop</title>
+  <meta name="theme-color" content="#080b16" />
+  <title>Loop v4</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -13,99 +13,98 @@
     <header class="topbar">
       <div class="brand">Loop</div>
       <div class="top-actions">
-        <button class="ghost-btn" id="openVsArena">VS</button>
-        <button class="ghost-btn" id="openProfile">Perfil</button>
+        <button class="ghost small" id="openCreateTop">Crear</button>
+        <button class="ghost small" id="openProfileTop">Perfil</button>
       </div>
     </header>
 
-    <main class="feed" id="feed"></main>
+    <main id="feed" class="feed"></main>
 
     <nav class="bottom-nav">
-      <button class="nav-btn active" data-tab="feed">Feed</button>
-      <button class="nav-btn" data-tab="create">Crear</button>
-      <button class="nav-btn" data-tab="vs">VS</button>
-      <button class="nav-btn" data-tab="profile">Perfil</button>
+      <button class="nav-btn active" data-screen="feed">Feed</button>
+      <button class="nav-btn" data-screen="create">Crear</button>
+      <button class="nav-btn" data-screen="vs">VS</button>
+      <button class="nav-btn" data-screen="profile">Perfil</button>
     </nav>
-  </div>
 
-  <div class="modal hidden" id="createModal">
-    <div class="sheet">
-      <div class="sheet-head">
-        <h2>Crear en Loop</h2>
-        <button class="close-btn" data-close="createModal">✕</button>
+    <section class="sheet hidden" id="createSheet">
+      <div class="sheet-card">
+        <div class="sheet-head">
+          <h3>Crear en Loop</h3>
+          <button class="ghost" data-close="createSheet">✕</button>
+        </div>
+        <div class="grid2">
+          <button class="big-action" data-create-type="post">Post</button>
+          <button class="big-action" data-create-type="reto">Reto</button>
+          <button class="big-action" data-create-type="vs">VS</button>
+          <button class="big-action" data-create-type="respuesta">Respuesta</button>
+        </div>
+        <input id="creatorUser" placeholder="@usuario" />
+        <input id="creatorTitle" placeholder="Título" />
+        <textarea id="creatorCaption" placeholder="Escribe algo que enganche..."></textarea>
+        <button id="publishBtn" class="primary">Publicar demo</button>
       </div>
-      <div class="create-grid">
-        <button class="action-card" id="createPostBtn">
-          <span>📹</span><strong>Post normal</strong>
-          <small>Sube un video al feed</small>
-        </button>
-        <button class="action-card" id="createChallengeBtn">
-          <span>🔥</span><strong>Crear reto</strong>
-          <small>Lanza un challenge</small>
-        </button>
-        <button class="action-card" id="createVsBtn">
-          <span>⚔️</span><strong>Lanzar VS</strong>
-          <small>Desafía a otro usuario</small>
-        </button>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="modal hidden" id="composerModal">
-    <div class="sheet composer-sheet">
-      <div class="sheet-head">
-        <h2 id="composerTitle">Nuevo post</h2>
-        <button class="close-btn" data-close="composerModal">✕</button>
+    <section class="sheet hidden" id="profileSheet">
+      <div class="sheet-card">
+        <div class="sheet-head">
+          <h3>Tu perfil</h3>
+          <button class="ghost" data-close="profileSheet">✕</button>
+        </div>
+        <div class="profile-box">
+          <div class="avatar big">K</div>
+          <div>
+            <div class="p-name">@kevin.loop</div>
+            <div class="p-sub">Creador · 12 VS ganados</div>
+          </div>
+        </div>
+        <div class="stats">
+          <div><strong>18.2K</strong><span>Likes</span></div>
+          <div><strong>1.3K</strong><span>Followers</span></div>
+          <div><strong>27</strong><span>Retos</span></div>
+        </div>
       </div>
-      <div class="form">
-        <input id="inputUser" placeholder="Tu username" value="@kevin" />
-        <input id="inputTarget" class="hidden" placeholder="@usuario retado" />
-        <input id="inputTitle" placeholder="Título" />
-        <textarea id="inputCaption" placeholder="Escribe la descripción..."></textarea>
-        <select id="inputType">
-          <option value="post">Post normal</option>
-          <option value="challenge">Reto</option>
-          <option value="vs">VS</option>
-        </select>
-        <button class="primary-btn" id="publishBtn">Publicar</button>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="modal hidden" id="commentsModal">
-    <div class="sheet comments-sheet">
-      <div class="sheet-head">
-        <h2>Comentarios</h2>
-        <button class="close-btn" data-close="commentsModal">✕</button>
+    <section class="sheet hidden" id="vsSheet">
+      <div class="sheet-card">
+        <div class="sheet-head">
+          <h3>VS Arena</h3>
+          <button class="ghost" data-close="vsSheet">✕</button>
+        </div>
+        <div class="vs-card">
+          <div class="vs-side">
+            <div class="avatar big">M</div>
+            <strong>@mike.loop</strong>
+            <span>Dance Round</span>
+            <button class="primary vote-btn">Votar</button>
+          </div>
+          <div class="vs-middle">VS</div>
+          <div class="vs-side">
+            <div class="avatar big">A</div>
+            <strong>@anna.loop</strong>
+            <span>Dance Round</span>
+            <button class="primary vote-btn">Votar</button>
+          </div>
+        </div>
       </div>
-      <div id="commentsList" class="comments-list"></div>
-      <div class="comment-box">
-        <input id="commentInput" placeholder="Escribe un comentario..." />
-        <button class="primary-btn small" id="sendComment">Enviar</button>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="modal hidden" id="vsModal">
-    <div class="sheet vs-sheet">
-      <div class="sheet-head">
-        <h2>Loop VS Arena</h2>
-        <button class="close-btn" data-close="vsModal">✕</button>
+    <section class="sheet hidden" id="commentsSheet">
+      <div class="sheet-card comments-card">
+        <div class="sheet-head">
+          <h3>Comentarios</h3>
+          <button class="ghost" data-close="commentsSheet">✕</button>
+        </div>
+        <div id="commentsList" class="comments-list"></div>
+        <div class="comment-row">
+          <input id="commentInput" placeholder="Escribe un comentario..." />
+          <button id="sendComment" class="primary">Enviar</button>
+        </div>
       </div>
-      <div id="vsContent"></div>
-    </div>
+    </section>
   </div>
-
-  <div class="modal hidden" id="profileModal">
-    <div class="sheet profile-sheet">
-      <div class="sheet-head">
-        <h2>Perfil</h2>
-        <button class="close-btn" data-close="profileModal">✕</button>
-      </div>
-      <div id="profileContent"></div>
-    </div>
-  </div>
-
   <script src="app.js"></script>
 </body>
 </html>

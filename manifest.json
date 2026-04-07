@@ -1,9 +1,9 @@
 {
-  "name": "Loop",
+  "name": "Loop v4",
   "short_name": "Loop",
-  "start_url": ".",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#090d18",
-  "theme_color": "#0b1020",
+  "background_color": "#080b16",
+  "theme_color": "#080b16",
   "icons": []
 }
