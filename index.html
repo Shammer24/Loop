@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="theme-color" content="#0c0f16" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Loop" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loop — Challenge Social</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="installBanner" class="install-banner hidden">
+    <div>
+      <strong>Install Loop</strong>
+      <p>Add it to your home screen for a real app feel.</p>
+    </div>
+    <div class="install-actions">
+      <button id="installBtn" class="primary-btn">Install</button>
+      <button id="closeInstallBtn" class="ghost-btn">Later</button>
+    </div>
+  </div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">L</div>
+        <div>
+          <h1>Loop</h1>
+          <p>Real-time challenge network</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="feed">Feed</button>
+        <button class="nav-btn" data-view="create">Create</button>
+        <button class="nav-btn" data-view="live">Live VS</button>
+        <button class="nav-btn" data-view="profile">Profile</button>
+      </nav>
+      <section class="card small-card">
+        <h3>Safety Rules</h3>
+        <ul>
+          <li>No vehicles</li>
+          <li>No violence</li>
+          <li>No dangerous stunts</li>
+          <li>No hate or harassment</li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h2 id="viewTitle">Trending Feed</h2>
+          <p id="viewSubtitle">Challenges, VS battles and real-time reactions.</p>
+        </div>
+        <div class="top-actions">
+          <input id="searchInput" type="search" placeholder="Search challenge, creator, tag..." />
+          <button id="resetDataBtn" class="ghost-btn">Reset Demo</button>
+        </div>
+      </header>
+
+      <section id="feedView" class="view active">
+        <div class="toolbar">
+          <select id="filterType">
+            <option value="all">All posts</option>
+            <option value="challenge">Challenges</option>
+            <option value="vs">VS</option>
+            <option value="live">Live</option>
+          </select>
+          <select id="sortBy">
+            <option value="newest">Newest</option>
+            <option value="likes">Most liked</option>
+            <option value="comments">Most commented</option>
+          </select>
+        </div>
+        <div id="feedList" class="feed-list"></div>
+      </section>
+
+      <section id="createView" class="view">
+        <div class="grid two-col">
+          <div class="card">
+            <h3>Create a Challenge</h3>
+            <form id="challengeForm" class="stack-form">
+              <input name="title" placeholder="Challenge title" required />
+              <textarea name="description" placeholder="Explain the challenge" rows="4" required></textarea>
+              <div class="inline-grid">
+                <select name="category" required>
+                  <option value="">Category</option>
+                  <option>Humor</option>
+                  <option>Dance</option>
+                  <option>Reaction</option>
+                  <option>Talent</option>
+                  <option>Fitness Safe</option>
+                  <option>Creativity</option>
+                </select>
+                <input name="duration" type="number" min="10" max="300" value="30" required placeholder="Seconds" />
+              </div>
+              <input name="tags" placeholder="Tags separated by commas" />
+              <button type="submit" class="primary-btn">Post Challenge</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Create a VS</h3>
+            <form id="vsForm" class="stack-form">
+              <input name="title" placeholder="VS title" required />
+              <input name="opponent" placeholder="Opponent username" required />
+              <textarea name="description" placeholder="What are you both competing in?" rows="4" required></textarea>
+              <div class="inline-grid">
+                <select name="category" required>
+                  <option value="">Category</option>
+                  <option>Dance</option>
+                  <option>Freestyle</option>
+                  <option>Humor</option>
+                  <option>Reaction</option>
+                  <option>Talent</option>
+                </select>
+                <select name="mode" required>
+                  <option value="recorded">Recorded VS</option>
+                  <option value="live">Live VS</option>
+                </select>
+              </div>
+              <button type="submit" class="primary-btn">Launch VS</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="liveView" class="view">
+        <div class="grid live-grid">
+          <div class="card live-stage">
+            <div class="live-header">
+              <h3>Live VS Arena</h3>
+              <span class="live-pill">LIVE</span>
+            </div>
+            <div class="arena">
+              <div class="fighter">
+                <div class="avatar big">A</div>
+                <h4>@alexloop</h4>
+                <p>Dance battle</p>
+              </div>
+              <div class="vs-mark">VS</div>
+              <div class="fighter">
+                <div class="avatar big alt">M</div>
+                <h4>@mialive</h4>
+                <p>Dance battle</p>
+              </div>
+            </div>
+            <div class="vote-panel">
+              <button id="voteLeftBtn" class="vote-btn">Vote Alex</button>
+              <div class="vote-stats">
+                <span id="leftVotes">124</span>
+                <span class="divider">|</span>
+                <span id="rightVotes">119</span>
+              </div>
+              <button id="voteRightBtn" class="vote-btn">Vote Mia</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Live Chat</h3>
+            <div id="liveChat" class="chat-box"></div>
+            <form id="chatForm" class="chat-form">
+              <input id="chatInput" placeholder="Type a comment..." required />
+              <button type="submit" class="primary-btn">Send</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="profileView" class="view">
+        <div class="grid two-col">
+          <div class="card profile-card">
+            <div class="profile-top">
+              <div class="avatar huge">K</div>
+              <div>
+                <h3>@kevinloop</h3>
+                <p>Challenge starter</p>
+              </div>
+            </div>
+            <div class="stats-grid">
+              <div><strong id="statPosts">0</strong><span>Posts</span></div>
+              <div><strong id="statLikes">0</strong><span>Total Likes</span></div>
+              <div><strong id="statComments">0</strong><span>Comments</span></div>
+              <div><strong>7</strong><span>Day Streak</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Your Recent Posts</h3>
+            <div id="profilePosts" class="mini-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="postTemplate">
+    <article class="post-card">
+      <div class="post-top">
+        <div class="user-block">
+          <div class="avatar"></div>
+          <div>
+            <h4 class="post-user"></h4>
+            <p class="post-meta"></p>
+          </div>
+        </div>
+        <span class="type-badge"></span>
+      </div>
+      <div class="post-media">
+        <div class="mock-video">
+          <span class="play-icon">▶</span>
+        </div>
+      </div>
+      <h3 class="post-title"></h3>
+      <p class="post-description"></p>
+      <div class="tags"></div>
+      <div class="engagement">
+        <button class="engage-btn like-btn">❤️ <span></span></button>
+        <button class="engage-btn comment-toggle-btn">💬 <span></span></button>
+        <button class="engage-btn vs-btn">🆚 VS</button>
+        <button class="engage-btn challenge-btn">🎯 Challenge</button>
+      </div>
+      <div class="comments-section hidden">
+        <div class="comment-list"></div>
+        <form class="comment-form">
+          <input placeholder="Leave a comment" required />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</body>
+</html>

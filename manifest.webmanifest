@@ -1,0 +1,21 @@
+{
+  "name": "Loop \u2014 Challenge Social",
+  "short_name": "Loop",
+  "description": "Real-time challenge network with VS battles, likes, comments and live rooms.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090b11",
+  "theme_color": "#0c0f16",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
